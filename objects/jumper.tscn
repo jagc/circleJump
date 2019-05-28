@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/jumper.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/jumper.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 color : hint_color;
+
+void fragment() {
+	COLOR.rgb = color.rgb;
+	COLOR.a = texture(TEXTURE, UV).a;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/color = Color( 0.901961, 0.0784314, 0.831373, 1 )
+
+[node name="jumper" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -20.9144, -21.4843, 20.7725, -0.39167, -21.0805, 21.0331 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="area_entered" from="." to="." method="_on_jumper_area_entered"]
