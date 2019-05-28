@@ -18,6 +18,12 @@ func _on_jumper_area_entered(area):
 
 func _physics_process(delta):
 	if target:
-		transform = target.orbit_position.global_transform
+#		for i in len(target):
+#			print(target[i])
+#			print(target)
+#			print(target.position)
+#		transform = target.orbit_position.global_transform
+		transform = target.position.transform
+#		transform = target.position.global_transform
 	else:
 		position += velocity * delta
