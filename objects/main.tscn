@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://objects/jumper.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/circle.tscn" type="PackedScene" id=2]
+[gd_scene format=2]
 
 [node name="main" type="Node2D"]
 
-[node name="jumper" parent="." instance=ExtResource( 1 )]
-position = Vector2( 151.555, 464.77 )
+[node name="startPosition" type="Position2D" parent="."]
+position = Vector2( 228.163, 802.696 )
 
-[node name="circle" parent="." instance=ExtResource( 2 )]
-position = Vector2( 323.318, 472.853 )
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 0, -200 )
+current = true
