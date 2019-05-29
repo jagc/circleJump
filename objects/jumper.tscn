@@ -21,3 +21,4 @@ polygon = PoolVector2Array( -20.9144, -21.4843, 20.7725, -0.39167, -21.0805, 21.
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 [connection signal="area_entered" from="." to="." method="_on_jumper_area_entered"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
