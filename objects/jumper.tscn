@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/jumper.gd" type="Script" id=1]
 [ext_resource path="res://objects/color.shader" type="Shader" id=2]
@@ -7,6 +7,9 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/color = Color( 0.901961, 0.0784314, 0.831373, 1 )
+
+[sub_resource type="SegmentShape2D" id=2]
+b = Vector2( 714.365, 0.497272 )
 
 [node name="jumper" type="Area2D"]
 script = ExtResource( 1 )
@@ -20,5 +23,17 @@ texture = ExtResource( 3 )
 polygon = PoolVector2Array( -20.9144, -21.4843, 20.7725, -0.39167, -21.0805, 21.0331 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 20.9887
+margin_top = -0.916218
+margin_right = 734.989
+margin_bottom = 0.0837822
+
+[node name="Area2D" type="Area2D" parent="ColorRect"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/Area2D"]
+position = Vector2( 0, 0.489288 )
+shape = SubResource( 2 )
 [connection signal="area_entered" from="." to="." method="_on_jumper_area_entered"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

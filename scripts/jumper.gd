@@ -17,9 +17,14 @@ func jump():
 # 'area' is the circle.gd object
 func _on_jumper_area_entered(area):
 	target = area
-	target.get_node("pivot").rotation = (position - target.position).angle()
+
+	var _rotation = (position - target.position).angle()
+	var is_rotatingClockwise = 1 if _rotation > 1.4 else -1
+
+	target.get_node("pivot").rotation = _rotation
 	velocity = Vector2.ZERO
-	emit_signal("captured", area)
+
+	emit_signal("captured", area, is_rotatingClockwise)
 
 func _physics_process(delta):
 	if target:
