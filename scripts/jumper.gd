@@ -46,11 +46,14 @@ func _physics_process(delta):
 	else:
 		trail.add_point(position)
 	
-	
 	if target:
 		transform = target.orbitPosition.global_transform
 	else:
 		position += velocity * delta
+
+func die():
+	target = null
+	queue_free()
 
 func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	call_deferred("_reloadMainScene")
