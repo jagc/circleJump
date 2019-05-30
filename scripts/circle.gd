@@ -30,3 +30,8 @@ func init(_position, jumperIsRotatingClockwise, _radius = radius):
 	
 func _process(delta):
 	$pivot.rotation += rotationSpeed * delta
+	
+func implode():
+	$AnimationPlayer.play('implode')
+	yield($AnimationPlayer, "animation_finished")
+	queue_free()

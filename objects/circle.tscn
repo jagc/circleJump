@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/circle.gd" type="Script" id=1]
 [ext_resource path="res://objects/color.shader" type="Shader" id=2]
@@ -11,6 +11,34 @@ shader_param/color = Color( 0.576471, 0.960784, 0.290196, 1 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 135.214
 
+[sub_resource type="Animation" id=3]
+resource_name = "implode"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-005, 1e-005 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="circle" type="Area2D"]
 script = ExtResource( 1 )
 
@@ -22,5 +50,9 @@ texture = ExtResource( 3 )
 shape = SubResource( 2 )
 
 [node name="pivot" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="orbitPosition" type="Position2D" parent="pivot"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/implode = SubResource( 3 )
