@@ -2,9 +2,12 @@ extends Area2D
 
 signal captured
 
+onready var trail = $trail/points
+
 var velocity = Vector2(100, 0) # start value for testing
 var jumpSpeed = 1000
 var target = null # if we're on a circle
+var trailLength = 25
 
 func _unhandled_input(event):
 	if target and event is InputEventScreenTouch and event.pressed:
@@ -28,6 +31,10 @@ func _on_jumper_area_entered(area):
 	emit_signal("captured", area, is_rotatingClockwise)
 
 func _physics_process(delta):
+	if trail.points.size() > trailLength:
+		trail.remove_point(0)
+	trail.add_point(position)
+	
 	if target:
 		transform = target.orbitPosition.global_transform
 	else:
