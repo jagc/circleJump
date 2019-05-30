@@ -29,5 +29,6 @@ func spawnCircle(_position = null):
 		
 func _on_Jumper_captured(object, isRotatingClockwise):
 	$Camera2D.position = object.position
+	object.capture()
 	jumperIsRotatingClockwise = isRotatingClockwise
 	call_deferred("spawnCircle")

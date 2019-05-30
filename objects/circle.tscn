@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/circle.gd" type="Script" id=1]
 [ext_resource path="res://objects/color.shader" type="Shader" id=2]
@@ -10,6 +10,47 @@ shader_param/color = Color( 0.576471, 0.960784, 0.290196, 1 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 135.214
+
+[sub_resource type="Animation" id=4]
+resource_name = "capture"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteEffect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.00162872 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteEffect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00162872, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 1e-005, 1e-005 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteEffect:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.498039 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "implode"
@@ -46,6 +87,12 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 texture = ExtResource( 3 )
 
+[node name="SpriteEffect" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.498039 )
+material = SubResource( 1 )
+scale = Vector2( 1e-005, 1e-005 )
+texture = ExtResource( 3 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
@@ -55,4 +102,5 @@ editor/display_folded = true
 [node name="orbitPosition" type="Position2D" parent="pivot"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/capture = SubResource( 4 )
 anims/implode = SubResource( 3 )
