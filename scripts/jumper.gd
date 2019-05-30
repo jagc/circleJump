@@ -56,6 +56,8 @@ func die():
 	queue_free()
 
 func _on_VisibilityNotifier2D_viewport_exited(_viewport):
+	if !target:
+		die()
 	call_deferred("_reloadMainScene")
 	
 func _reloadMainScene():
