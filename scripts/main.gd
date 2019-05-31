@@ -5,11 +5,15 @@ var jumper = preload("res://objects/jumper.tscn")
 
 var player
 var jumperIsRotatingClockwise = 1
+var score = 0
 
 func _ready():
 	randomize()
+	$HUD.hide()
 	
 func newGame():
+	score = 0
+	$HUD.updateScore(score)
 	$Camera2D.position = $startPosition.position
 	player = jumper.instance()
 	player.position = $startPosition.position
@@ -17,6 +21,8 @@ func newGame():
 	player.connect("captured", self, "_on_Jumper_captured")
 	player.connect("died", self, "on_Jumper_died")
 	spawnCircle($startPosition.position)
+	$HUD.show()
+	$HUD.showMessage("Go!")
 	
 func spawnCircle(_position = null):
 	var c = circle.instance()
@@ -32,7 +38,10 @@ func _on_Jumper_captured(object, isRotatingClockwise):
 	object.capture(player)
 	jumperIsRotatingClockwise = isRotatingClockwise
 	call_deferred("spawnCircle")
+	score += 1
+	$HUD.updateScore(score)
 	
 func on_Jumper_died():
 	get_tree().call_group("circles", "implode")
 	$screens.gameOver()
+	$HUD.hide()

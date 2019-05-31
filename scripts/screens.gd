@@ -14,7 +14,6 @@ func registerButtons():
 		button.connect("pressed", self, "_on_button_pressed", [button.name])
 		
 func _on_button_pressed(name):
-	print(name)
 	match name:
 		"home":
 			changeScreen($titleScreen)
