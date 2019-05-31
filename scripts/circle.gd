@@ -21,6 +21,8 @@ func init(_position, jumperIsRotatingClockwise, _radius = radius, _mode = MODES.
 	setMode(_mode)
 	position = _position
 	radius = _radius
+	$Sprite.material = $Sprite.material.duplicate()
+	$SpriteEffect.material = $Sprite.material
 	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
 	$CollisionShape2D.shape.radius = radius
 	var imgSize = $Sprite.texture.get_size().x / 2
@@ -37,13 +39,17 @@ func init(_position, jumperIsRotatingClockwise, _radius = radius, _mode = MODES.
 	
 func setMode(_mode):
 	mode = _mode
+	var color
 	match mode:
 		MODES.STATIC:
 			$Label.hide()
+			color = settings.theme["circle_static"]
 		MODES.LIMITED:
 			currentOrbits = numOrbits
 			$Label.text = str(currentOrbits)
 			$Label.show()
+			color = settings.theme["circle_limited"]
+	$Sprite.material.set_shader_param("color", color)
 
 func _process(delta):
 	$pivot.rotation += rotationSpeed * delta
@@ -78,7 +84,7 @@ func _draw():
 	if jumper:
 		var r = ((radius - 50) / numOrbits) * (1 + numOrbits - currentOrbits)
 		draw_circle_arc_poly(Vector2.ZERO, r + 10, orbitStart + PI/2,
-							$pivot.rotation + PI/2, Color(1, 0, 0))
+							$pivot.rotation + PI/2, settings.theme["circle_fill"])
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
     var nb_points = 32
     var points_arc = PoolVector2Array()

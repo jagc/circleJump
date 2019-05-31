@@ -104,7 +104,6 @@ texture = ExtResource( 3 )
 shape = SubResource( 2 )
 
 [node name="pivot" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="orbitPosition" type="Position2D" parent="pivot"]
 

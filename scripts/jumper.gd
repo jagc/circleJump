@@ -12,6 +12,9 @@ var trailLength = 25
 var is_rotatingClockwise = 1
 var isJumping = false
 
+func _ready():
+	$Sprite.material.set_shader_param("color", settings.theme["player_body"])
+	trail.default_color = settings.theme["player_trail"]
 func _unhandled_input(event):
 	if target and event is InputEventScreenTouch and event.pressed:
 		jump()
@@ -64,7 +67,3 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if !target:
 		emit_signal("died")
 		die()
-#	call_deferred("_reloadMainScene")
-#
-#func _reloadMainScene():
-#	return get_tree().reload_current_scene()
