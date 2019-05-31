@@ -4,7 +4,10 @@
 [ext_resource path="res://assets/images/buttons/home.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/buttons/return.png" type="Texture" id=3]
 
-[node name="gameOverScreen" instance=ExtResource( 1 )]
+[node name="gameOverScreen" index="0" instance=ExtResource( 1 )]
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="0"]
+text = "Game Over"
 
 [node name="buttons" parent="MarginContainer/VBoxContainer" index="1"]
 margin_bottom = 328.0
