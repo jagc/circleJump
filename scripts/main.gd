@@ -44,6 +44,7 @@ func _on_Jumper_captured(object, isRotatingClockwise):
 	$HUD.updateScore(score)
 	
 func on_Jumper_died():
+	settings.saveData(score)
 	get_tree().call_group("circles", "implode")
 	$screens.gameOver()
 	$HUD.hide()

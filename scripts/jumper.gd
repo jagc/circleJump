@@ -48,9 +48,9 @@ func _physics_process(delta):
 
 	if isJumping == false:
 		if is_rotatingClockwise == 1:
-			trail.add_point(position + Vector2(0,15).rotated(rotation))
+			trail.add_point(position + Vector2(0,7).rotated(rotation))
 		else:
-			trail.add_point(position - Vector2(0,15).rotated(rotation))
+			trail.add_point(position - Vector2(0,7).rotated(rotation))
 	else:
 		trail.add_point(position)
 	

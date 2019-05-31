@@ -1,7 +1,10 @@
 extends Node
 
+const SAVE_FILE_PATH = "user://circleJumpData.save"
+
 var enableSound = true
 var enableMusic = true
+var data
 
 var circlesPerLevel = 5
 
@@ -33,3 +36,39 @@ var color_schemes = {
 }
 
 var theme = color_schemes["NEON2"]
+
+func _ready():
+	data = loadData()
+	enableMusic = data["enableMusic"]
+	enableSound = data["enableSound"]
+
+func saveData(score = null):
+	if score != null:
+		if loadHighScore() > score:
+			return
+	
+	var _file = File.new()
+	_file.open(SAVE_FILE_PATH, File.WRITE)
+	
+	var _data = {
+		highScore = score,
+		enableSound = enableSound,
+		enableMusic = enableMusic
+	}
+	
+	_file.store_line(to_json(_data))
+	_file.close()
+
+func loadData():
+	var _file = File.new()
+	if !_file.file_exists(SAVE_FILE_PATH):
+		return 0
+		
+	_file.open(SAVE_FILE_PATH, File.READ)
+	var _data = parse_json(_file.get_line())
+	
+	return _data
+	
+func loadHighScore():
+	var highScore = 0 if data["highScore"] == null else data["highScore"]
+	return highScore
