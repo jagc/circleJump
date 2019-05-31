@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/screens.gd" type="Script" id=1]
+[ext_resource path="res://UI/titleScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/settingsScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/gameOverScreen.tscn" type="PackedScene" id=4]
+
+[node name="screens" type="Node"]
+script = ExtResource( 1 )
+
+[node name="titleScreen" parent="." instance=ExtResource( 2 )]
+
+[node name="settingsScreen" parent="." instance=ExtResource( 3 )]
+
+[node name="gameOverScreen" parent="." instance=ExtResource( 4 )]
