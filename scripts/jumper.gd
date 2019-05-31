@@ -1,6 +1,7 @@
 extends Area2D
 
 signal captured
+signal died
 
 onready var trail = $trail/points
 
@@ -57,6 +58,7 @@ func die():
 
 func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if !target:
+		emit_signal("died")
 		die()
 	call_deferred("_reloadMainScene")
 	

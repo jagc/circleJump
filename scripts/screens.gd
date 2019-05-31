@@ -20,6 +20,7 @@ func _on_button_pressed(name):
 			changeScreen($titleScreen)
 		"play":
 			changeScreen(null)
+			yield(get_tree().create_timer(0.5), "timeout")
 			emit_signal("startGame")
 		"settings":
 			changeScreen($settingsScreen)
@@ -32,3 +33,6 @@ func changeScreen(newScreen):
 	if newScreen:
 		currentScreen.appear()
 		yield(currentScreen.tween, "tween_completed")
+		
+func gameOver():
+	changeScreen($gameOverScreen)

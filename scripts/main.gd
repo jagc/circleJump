@@ -8,7 +8,6 @@ var jumperIsRotatingClockwise = 1
 
 func _ready():
 	randomize()
-	newGame()
 	
 func newGame():
 	$Camera2D.position = $startPosition.position
@@ -16,6 +15,7 @@ func newGame():
 	player.position = $startPosition.position
 	add_child(player)
 	player.connect("captured", self, "_on_Jumper_captured")
+	player.connect("died", self, "on_Jumper_died")
 	spawnCircle($startPosition.position)
 	
 func spawnCircle(_position = null):
@@ -32,3 +32,7 @@ func _on_Jumper_captured(object, isRotatingClockwise):
 	object.capture(player)
 	jumperIsRotatingClockwise = isRotatingClockwise
 	call_deferred("spawnCircle")
+	
+func on_Jumper_died():
+	get_tree().call_group("circles", "implode")
+	$screens.gameOver()
