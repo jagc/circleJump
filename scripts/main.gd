@@ -23,6 +23,8 @@ func newGame():
 	spawnCircle($startPosition.position)
 	$HUD.show()
 	$HUD.showMessage("Go!")
+	if settings.enableMusic:
+		$music.play()
 	
 func spawnCircle(_position = null):
 	var c = circle.instance()
@@ -45,3 +47,5 @@ func on_Jumper_died():
 	get_tree().call_group("circles", "implode")
 	$screens.gameOver()
 	$HUD.hide()
+	if settings.enableMusic:
+		$music.stop()

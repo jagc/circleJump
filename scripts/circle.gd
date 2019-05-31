@@ -54,6 +54,8 @@ func _process(delta):
 func checkOrbits():
 	if abs($pivot.rotation - orbitStart) > 2 * PI:
 		currentOrbits -= 1
+		if settings.enableSound:
+			$beep.play()
 		$Label.text = str(currentOrbits)
 		if currentOrbits <= 0:
 			jumper.die()

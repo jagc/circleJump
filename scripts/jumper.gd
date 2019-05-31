@@ -21,6 +21,8 @@ func jump():
 	target.implode()
 	target = null
 	velocity = transform.x * jumpSpeed
+	if settings.enableSound:
+		$jump.play()
 
 # 'area' is the circle.gd object
 func _on_jumper_area_entered(area):
@@ -34,6 +36,8 @@ func _on_jumper_area_entered(area):
 	velocity = Vector2.ZERO
 
 	emit_signal("captured", area, is_rotatingClockwise)
+	if settings.enableSound:
+		$capture.play()
 
 func _physics_process(delta):
 	if trail.points.size() > trailLength:
@@ -60,7 +64,7 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if !target:
 		emit_signal("died")
 		die()
-	call_deferred("_reloadMainScene")
-	
-func _reloadMainScene():
-	return get_tree().reload_current_scene()
+#	call_deferred("_reloadMainScene")
+#
+#func _reloadMainScene():
+#	return get_tree().reload_current_scene()
