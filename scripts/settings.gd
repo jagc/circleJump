@@ -35,7 +35,7 @@ var color_schemes = {
     }
 }
 
-var theme = color_schemes["NEON2"]
+var theme = color_schemes["NEON1"]
 
 func _ready():
 	data = loadData()

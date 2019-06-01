@@ -46,7 +46,7 @@ func init(_position, jumperIsRotatingClockwise, level = 1):
 	var smallChance = min(0.9, max(0, (level-10) / 20.0)) # chance to spawn a smaller than average circle
 	if randf() < smallChance:
 		radius = max(50, radius - level * rand_range(0.75, 1.25))
-	radius = _radius
+	radius = radius
 	$Sprite.material = $Sprite.material.duplicate()
 	$SpriteEffect.material = $Sprite.material
 	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()

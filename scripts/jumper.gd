@@ -14,7 +14,11 @@ var isJumping = false
 
 func _ready():
 	$Sprite.material.set_shader_param("color", settings.theme["player_body"])
-	trail.default_color = settings.theme["player_trail"]
+	var trailColor = settings.theme["player_trail"]
+	trail.gradient.set_color(1, trailColor)
+	trailColor.a = 0
+	trail.gradient.set_color(0, trailColor)
+
 func _unhandled_input(event):
 	if target and event is InputEventScreenTouch and event.pressed:
 		jump()
