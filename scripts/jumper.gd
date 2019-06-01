@@ -57,6 +57,7 @@ func _physics_process(delta):
 			trail.add_point(position - Vector2(0,7).rotated(rotation))
 	else:
 		trail.add_point(position)
+#	trail.add_point(position)
 	
 	if target:
 		transform = target.orbitPosition.global_transform

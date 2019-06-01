@@ -13,7 +13,7 @@ enum MODES {STATIC, LIMITED}
 var radius = 100
 var rotationSpeed = PI
 var mode = MODES.STATIC
-var moveRange = 100
+var moveRange = 0
 var moveSpeed = 1.0
 var numOrbits = 3
 var currentOrbits = 0
@@ -46,7 +46,7 @@ func init(_position, jumperIsRotatingClockwise, level = 1):
 	var smallChance = min(0.9, max(0, (level-10) / 20.0)) # chance to spawn a smaller than average circle
 	if randf() < smallChance:
 		radius = max(50, radius - level * rand_range(0.75, 1.25))
-	radius = radius
+#	radius = radius
 	$Sprite.material = $Sprite.material.duplicate()
 	$SpriteEffect.material = $Sprite.material
 	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
@@ -82,7 +82,7 @@ func _process(delta):
 	$pivot.rotation += rotationSpeed * delta
 	if mode == MODES.LIMITED and jumper:
 		checkOrbits()
-	update()
+		update()
 		
 func checkOrbits():
 	if abs($pivot.rotation - orbitStart) > 2 * PI:
@@ -110,7 +110,7 @@ func capture(target):
 func _draw():
 	if jumper:
 		var r = ((radius - 50) / numOrbits) * (1 + numOrbits - currentOrbits)
-		draw_circle_arc_poly(Vector2.ZERO, r + 10, orbitStart + PI/2,
+		draw_circle_arc_poly(Vector2.ZERO, r, orbitStart + PI/2,
 							$pivot.rotation + PI/2, settings.theme["circle_fill"])
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
     var nb_points = 32
