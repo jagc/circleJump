@@ -40,7 +40,7 @@ func spawnCircle(_position = null):
 		var y = rand_range(-350, -250)
 		_position = player.target.position + Vector2(x, y)
 	add_child(c)
-	c.init(_position, jumperIsRotatingClockwise)
+	c.init(_position, jumperIsRotatingClockwise, level)
 		
 func _on_Jumper_captured(object, isRotatingClockwise):
 	$Camera2D.position = object.position

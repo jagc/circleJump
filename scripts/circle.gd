@@ -20,9 +20,32 @@ var currentOrbits = 0
 var orbitStart = null
 var jumper = null
 	
-func init(_position, jumperIsRotatingClockwise, _radius = radius, _mode = MODES.LIMITED):
+func init(_position, jumperIsRotatingClockwise, level = 1):
+	# level in this argument means that at level 1,
+	# we'll have 0% chance that we're going to see a limited cirle
+	var _mode = settings.randWeighted([10, level-1])
 	setMode(_mode)
 	position = _position
+	# There won't be moving circles for the first 10 levels
+	var moveChance = clamp(level -10, 0, 9) / 10.0 # odds that we'll be spawning a moving circle
+	if randf() < moveChance: #if true, we'll have a moving circle
+		# as player goes higher, the values here should be larger,
+		# making the game more difficult.
+		# We will randomize these variables by using the 'desmos' formula.
+		# DESMOS is a graphing tool where in our set, the line starts out flat
+		# but then, we'll have a continuous linear progress until we cap out to something close to max value
+		# The line represents the level & difficulty.
+		# max is an impossible difficulty.
+		# x axis is the level
+		# y axis is the difficulty
+		# https://www.desmos.com/calculator
+		# moveRange - has a minimum value, value goes higher as the level goes up
+		moveRange = max(25, 100 * rand_range(0.75, 1.25) * moveChance) * pow(-1, randi() % 2)
+		# moveRange - amount of time for the tween to execute, based on the level too.
+		moveSpeed = max(2.5 - ceil(level/5) * 0.25, 0.75)
+	var smallChance = min(0.9, max(0, (level-10) / 20.0)) # chance to spawn a smaller than average circle
+	if randf() < smallChance:
+		radius = max(50, radius - level * rand_range(0.75, 1.25))
 	radius = _radius
 	$Sprite.material = $Sprite.material.duplicate()
 	$SpriteEffect.material = $Sprite.material
