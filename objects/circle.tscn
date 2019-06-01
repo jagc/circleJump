@@ -127,3 +127,6 @@ valign = 1
 
 [node name="beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+
+[node name="moveTween" type="Tween" parent="."]
+[connection signal="tween_completed" from="moveTween" to="." method="setTween"]

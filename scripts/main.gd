@@ -5,14 +5,21 @@ var jumper = preload("res://objects/jumper.tscn")
 
 var player
 var jumperIsRotatingClockwise = 1
-var score = 0
+var score = 0 setget setScore
+var level = 0
 
 func _ready():
 	randomize()
 	$HUD.hide()
 	
 func newGame():
-	score = 0
+	# doing it this way, there is a small performance hit
+	# because we are generating a reference to a node (to this node)
+	# but since the game is small, we don't need to worry about performance
+	self.score = 0
+#	setScore(0) # this way is calling the setget directly
+	
+	level = 1	
 	$HUD.updateScore(score)
 	$Camera2D.position = $startPosition.position
 	player = jumper.instance()
@@ -40,8 +47,14 @@ func _on_Jumper_captured(object, isRotatingClockwise):
 	object.capture(player)
 	jumperIsRotatingClockwise = isRotatingClockwise
 	call_deferred("spawnCircle")
-	score += 1
+	self.score += 1
+	
+func setScore(value):
+	score = value
 	$HUD.updateScore(score)
+	if score > 0 and score % settings.circlesPerLevel == 0:
+		level += 1
+		$HUD.showMessage("Level %s" % str(level))
 	
 func on_Jumper_died():
 	settings.saveData(score)
