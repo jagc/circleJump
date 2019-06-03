@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://UI/screens.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/audio/Music_Light-Puzzles.ogg" type="AudioStream" id=4]
+[ext_resource path="res://objects/background.tscn" type="PackedScene" id=5]
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
@@ -24,4 +25,6 @@ smoothing_speed = 8.0
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="background" parent="." instance=ExtResource( 5 )]
 [connection signal="startGame" from="screens" to="." method="newGame"]
