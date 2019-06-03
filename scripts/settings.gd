@@ -39,8 +39,12 @@ var theme = color_schemes["NEON1"]
 
 func _ready():
 	data = loadData()
-	enableMusic = data["enableMusic"]
-	enableSound = data["enableSound"]
+	dataSetter(data)
+
+func dataSetter(data):
+	if typeof(data) == TYPE_DICTIONARY:
+		enableMusic = data["enableMusic"]
+		enableSound = data["enableSound"]
 
 func saveData(score = null):
 	if score != null:

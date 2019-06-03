@@ -41,6 +41,9 @@ func _on_jumper_area_entered(area):
 
 	target.get_node("pivot").rotation = _rotation
 	velocity = Vector2.ZERO
+	# i think this next code is key to rotate the arrow
+	# will rotate this when i know how to use godot more.
+#	str(self.rotation)
 
 	emit_signal("captured", area, is_rotatingClockwise)
 	if settings.enableSound:
@@ -57,7 +60,6 @@ func _physics_process(delta):
 			trail.add_point(position - Vector2(0,7).rotated(rotation))
 	else:
 		trail.add_point(position)
-#	trail.add_point(position)
 	
 	if target:
 		transform = target.orbitPosition.global_transform
